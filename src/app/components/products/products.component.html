@@ -1,0 +1,68 @@
+<button type="button" class="btn btn-primary m-2 float-end" data-bs-toggle = "modal" data-bs-target ="#productModal" 
+(click)="addClick()"
+ >
+    Add Product
+</button>
+<div class="container my-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Category Id</th>
+                <th>Category Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let prod of products">
+                <td>{{prod.productId}}</td>
+                <td>{{prod.productName}}</td>
+                <td>{{prod.categoryId}}</td>
+                <td>{{prod.categoryName}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary mr-1 mx-5 " data-bs-toggle="modal" data-bs-target="#productModal" (click)="editClick(prod)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="color:blue;" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                          </svg>
+                    </button>
+
+                    <button type="button" class="btn btn-primary mr-1 mx-5 " data-bs-toggle="modal" data-bs-target="#productModal" (click)="deleteClick(prod.productId)" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="color: red;" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                          </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="productModal" tabindex="-1" area-labelledby="exampleModalLabel" area-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-tiltle" id="exampleModalLabel">
+            {{modalTitle}}
+          </h5>
+          <button class="btn-close" data-bs-dismiss="modal" area-label="close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Product Name</span>
+            <input type="text" class="form-control" [(ngModel)]="productName">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Category Id</span>
+            <input type="text" class="form-control" [(ngModel)]="categoryId">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Category Name</span>
+            <input type="select" class="form-control" [(ngModel)]="categoryName">
+          </div>
+          <button type="button" class="btn btn-primary" (click)="createClick()" *ngIf="productId==0">Add</button>
+         <button type="button" *ngIf="productId!=0" class="btn btn-primary" (click)="updateClick()">Update</button >
+        </div>
+      </div>
+    </div>
+  </div>
